@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проект по отношениям</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <p>Привет! Если ты видишь это сообщение, значит, я написал тебе в Telegram, попросил принять участие в моем проекте. Вот о чем идёт речь:</p>
+  <p>Я учусь в 9 классе, и, как и любой 9 классник (наверное, ты тоже), мне нужно сдавать проект. Я хочу сделать проект про отношения в нашем (подростковом) возрасте. Поэтому прошу тебя отвечать честно.</p>
+  <p>В каком классе ты учишься?</p>
+
+  <form id="classForm">
+    <select name="class">
+      <option value="7">7 класс</option>
+      <option value="8">8 класс</option>
+      <option value="9">9 класс</option>
+      <option value="10">10 класс</option>
+      <option value="11">11 класс</option>
+    </select>
+    <br>
+    <button type="button" onclick="continueToQuestion()">Продолжить</button>
+  </form>
+
+  <div id="questionSection" style="display: none;">
+    <h2>Есть ли у тебя парень?</h2>
+
+    <form id="answerForm">
+      <label>
+        <input type="radio" name="answer" value="yes"> Да
+      </label>
+      <label>
+        <input type="radio" name="answer" value="no"> Нет
+      </label>
+      <br>
+      <button type="button" onclick="submitForm()">Отправить</button>
+    </form>
+
+    <p id="thankYouMessage" style="display: none;">Спасибо за участие в моем проекте!</p>
+  </div>
+
+  <script>
+    function continueToQuestion() {
+      const classForm = document.getElementById('classForm');
+      const selectedClass = classForm.elements['class'].value;
+
+      if (selectedClass) {
+        classForm.style.display = 'none';
+        document.getElementById('questionSection').style.display = 'block';
+      } else {
+        alert('Пожалуйста, выберите ваш класс.');
+      }
+    }
+
+    function submitForm() {
+      const answerForm = document.getElementById('answerForm');
+      const answer = answerForm.querySelector('input[name="answer"]:checked');
+
+      if (answer) {
+        const userClass = document.getElementById('classForm').elements['class'].value;
+        const userAnswer = answer.value;
+
+        // Отправить информацию на почту (здесь нужно использовать бэкенд)
+
+        document.getElementById('questionSection').style.display = 'none';
+        document.getElementById('thankYouMessage').style.display = 'block';
+      } else {
+        alert('Пожалуйста, выберите ответ.');
+      }
+    }
+  </script>
+
+</body>
+</html>
